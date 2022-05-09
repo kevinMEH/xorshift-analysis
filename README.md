@@ -2,7 +2,7 @@
 
 ### AP Statistics Final Project
 
-While creating a small game using C, I noticed that the default rand() function isn't very good at giving me random numbers, so I wanted to see if I could find or implement a better algorithm to generate some random numbers.
+So I was creating a game using C, and I needed a way to generate some random numbers between 0 and 1. At first, I used C's rand() function, but I noticed that it isn't "random" and only has a specific set of values (32768 to be exact). I decided to go and see if I could find a better algorithm for random number generation.
 
 I went online and did some reading about the implementations of random number generators in various programming languages. Specifically, I was interested in the JavaScript implementation of its Math.random() function. It turns out that most modern browsers use an algorithm called xorshift for their Math.random() functions.
 
