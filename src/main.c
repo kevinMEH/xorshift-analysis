@@ -27,9 +27,18 @@ int main() {
 
     memcpy(&state, &original, sizeof(state));
     simulate10k(&xorshift, &state, "Default Implementation:");
-    
+    memcpy(&state, &original, sizeof(state));
+    simulate10k(&xorshiftAlt1, &state, "Alternative Implementation 1:");
+    memcpy(&state, &original, sizeof(state));
+    simulate10k(&xorshiftAlt2, &state, "Alternative Implementation 2:");
+    memcpy(&state, &original, sizeof(state));
+    simulate10k(&xorshiftAlt3, &state, "Alternative Implementation 3:");
+    memcpy(&state, &original, sizeof(state));
+    simulate10k(&xorshiftAlt4, &state, "Alternative Implementation 4:");
+
     fclose(report);
     fclose(raw);
+    fclose(sorted);
 
     return 0;
 }
