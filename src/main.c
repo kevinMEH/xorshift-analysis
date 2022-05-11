@@ -8,9 +8,15 @@
 
 #define PATH "./test/"
 
+FILE* report;
+FILE* raw;
+FILE* sorted;
+
 int main() {
-    FILE* report = fopen(PATH "report.txt", "w+");
-    FILE* raw = fopen(PATH "raw.txt", "w+");
+    report = fopen(PATH "report.txt", "w");
+    raw = fopen(PATH "raw.txt", "w");
+    sorted = fopen(PATH "sorted.txt", "w");
+
 
     ShiftState original;
     original.x[0] = 0b1101010000110100111010111101011000000111100010110110011101001100;
@@ -19,7 +25,7 @@ int main() {
     ShiftState state;
 
     memcpy(&state, &original, sizeof(state));
-    simulate10k(&xorshift, &state, report, raw);
+    simulate10k(&xorshift, &state, "Default Implementation:");
     
     fclose(report);
     fclose(raw);
@@ -27,7 +33,14 @@ int main() {
     return 0;
 }
 
-void simulate10k(RandomFunction function, ShiftState* state, FILE* report, FILE* raw) {
+void simulate10k(RandomFunction function, ShiftState* state, char* name) {
+    fprintf(report, name);
+    fprintf(report, "\n");
+    fprintf(raw, name);
+    fprintf(raw, "\n");
+    fprintf(sorted, name);
+    fprintf(sorted, "\n");
+
     double numbers[10000];
 
     double totalDist = 0.0;
@@ -53,4 +66,5 @@ void simulate10k(RandomFunction function, ShiftState* state, FILE* report, FILE*
 
     fprintf(report, "Average Distance Between Numbers: %lf\n", averageDist);
     fprintf(report, "Signed Square Distance Between Numbers: %lf\n", signedSquareDist);
+    fprintf(report, "\n");
 }
