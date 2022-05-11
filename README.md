@@ -38,7 +38,9 @@ The y value will be the ith element of the array of all of our 10000 randomly ge
 
 An example RNG data point will look something like this: ( 7149, 0.70941372070736175015 )
 
-Meanwhile, our simulated data point based on the line will look like this: ( 7149, 0.7149 )
+Meanwhile, our simulated data point based on the line will look like this: ( 7149, 0.714933333333 )
+
+Note that there is an offset of 0.00003333333333 to account for the fact that we're using subdivisions of 0.0001, and we're starting at 0 and ending at 0.9999.
 
 We'll go through each of our RNG data points, find the squared difference in distances between the actual distances with the simulated difference, and then sum up all these differences. Similar to the first test, this test is designed to help us test the uniformity of the distribution, and make sure that our RNG has good coverage on all numbers.
 

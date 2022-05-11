@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
@@ -64,7 +65,57 @@ void simulate10k(RandomFunction function, ShiftState* state, char* name) {
     
     double averageDist = totalDist / 9999;
 
+    qsort(numbers, 10000, sizeof(double), &compareFloat);
+
+    // Chi squared: Interval categorization
+    int freq[250] = { 0 };
+    const double chiDivision = 0.004;
+
+    int j = 0;
+    for(int i = 0; i < 10000; i++) {
+        double number = numbers[i];
+        fprintf(sorted, "%0.20lf\n", number);
+        for( ; j < 250; j++) {
+            if(number < chiDivision * (j + 1)) {
+                freq[j]++;
+                break;
+            }
+        }
+    }
+
+    // Calculating the chi score.
+    double chiScore = 0.0;
+    for(int i = 0; i < 250; i++) {
+        int frequency = freq[i];
+        double score = (frequency - 40) * (frequency - 40) / 40.0;
+        chiScore += score;
+    }
+
+    // Comparison to expected values
+    const double expDivision = 0.0001;
+    const double offset = 0.000033333333;
+    double totalSquaredDiffDist = 0.0;
+    for(int i = 0; i < 10000; i++) {
+        double number = numbers[i];
+        double expected = offset + expDivision * i;
+        double squaredDiffDist = (number - expected) * (number - expected);
+        totalSquaredDiffDist += squaredDiffDist;
+    }
+
+    fprintf(report, "Chi Squared Score For 250 Subdivisions of the Interval 0 - 1: %lf\n", chiScore);
+    fprintf(report, "Total Squared Difference Between Actual and Expected: %lf\n", totalSquaredDiffDist);
     fprintf(report, "Average Distance Between Numbers: %lf\n", averageDist);
     fprintf(report, "Signed Square Distance Between Numbers: %lf\n", signedSquareDist);
     fprintf(report, "\n");
+}
+
+int compareFloat(const void* one, const void* two) {
+    double result = *((double*)one) - *((double*)two);
+    if(result < 0) return -1;
+    if(result > 0) return 1;
+    if(result == 0) return 0;
+    else {
+        printf("Error: compareFloat: Wtf???");
+        return 0;
+    }
 }

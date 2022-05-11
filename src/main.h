@@ -7,6 +7,7 @@
 typedef u64 (*RandomFunction)(ShiftState*);
 
 int main();
-void simulate10k(RandomFunction, ShiftState*, FILE*, FILE*);
+void simulate10k(RandomFunction, ShiftState*, char* name);
+int compareFloat(const void*, const void*);
 
 #endif
