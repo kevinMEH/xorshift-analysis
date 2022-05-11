@@ -7,12 +7,10 @@
 #include "random.h"
 
 #define PATH "./test/"
-FILE* report;
-FILE* raw;
 
 int main() {
-    report = fopen(PATH "report.txt", "w+");
-    raw = fopen(PATH "raw.txt", "w+");
+    FILE* report = fopen(PATH "report.txt", "w+");
+    FILE* raw = fopen(PATH "raw.txt", "w+");
 
     ShiftState original;
     original.x[0] = 0b1101010000110100111010111101011000000111100010110110011101001100;
@@ -36,12 +34,12 @@ void simulate10k(RandomFunction function, ShiftState* state, FILE* report, FILE*
     double signedSquareDist = 0.0;
 
     u64 first = function(state);
-    double last = first / (0x8000000000000000u * 2.0);
+    double last = (double) first / ((double) 0x8000000000000000u * 2.0);
     numbers[0] = last;
     
     for(int i = 1; i < 10000; i++) {
         u64 num = function(state);
-        double normalized = num / (0x8000000000000000u * 2.0);
+        double normalized = (double) num / ((double) 0x8000000000000000u * 2.0);
         numbers[i] = normalized;
         
         totalDist += fabs(last - normalized);
@@ -52,10 +50,7 @@ void simulate10k(RandomFunction function, ShiftState* state, FILE* report, FILE*
     }
     
     double averageDist = totalDist / 9999;
-    
-    printf("%lf\n", averageDist);
-    printf("%lf\n", signedSquareDist);
-    
+
     fprintf(report, "Average Distance Between Numbers: %lf\n", averageDist);
     fprintf(report, "Signed Square Distance Between Numbers: %lf\n", signedSquareDist);
 }
