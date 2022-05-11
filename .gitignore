@@ -2,3 +2,6 @@ build/
 data/**
 test/
 .vscode
+CMakeLists.txt
+.idea/
+cmake-build-debug/
