@@ -16,7 +16,7 @@ u64 xorshiftAlt1(ShiftState *state) {
     u64 t = state -> x[0];
     u64 s = state -> x[1];
     state -> x[0] = s;
-    t ^= t << 22; // Org: 23
+    t ^= t << 18; // Org: 23
     t ^= t >> 18;
     t ^= s ^ (s >> 5);
     state -> x[1] = t;
@@ -29,7 +29,7 @@ u64 xorshiftAlt2(ShiftState *state) {
     state -> x[0] = s;
     t ^= t << 23;
     t ^= t >> 18;
-    t ^= s ^ (s >> 7); // Org: 5
+    t ^= s ^ (s >> 10); // Org: 5
     state -> x[1] = t;
     return t + s;
 }
@@ -38,9 +38,9 @@ u64 xorshiftAlt3(ShiftState *state) {
     u64 t = state -> x[0];
     u64 s = state -> x[1];
     state -> x[0] = s;
-    t ^= t << 22; // 23
-    t ^= t >> 17; // 18
-    t ^= s ^ (s >> 4); // 5
+    t ^= t << 18; // 23
+    t ^= t >> 23; // 18
+    t ^= s ^ (s >> 2); // 5
     state -> x[1] = t;
     return t + s;
 }
@@ -49,9 +49,9 @@ u64 xorshiftAlt4(ShiftState *state) {
     u64 t = state -> x[0];
     u64 s = state -> x[1];
     state -> x[0] = s;
-    t ^= t << 22; // 23
-    t ^= t >> 20; // 18
-    t ^= s ^ (s >> 6); // 5
+    t ^= t << 13; // 23
+    t ^= t >> 27; // 18
+    t ^= s ^ (s >> 9); // 5
     state -> x[1] = t;
     return t + s;
 }
