@@ -20,35 +20,35 @@ I've devised a few tests in order to test for "randomness."
 
 ### Test One: Testing for Uniformity
 
-First of all, a random number generator is designed to give a uniform distribution of random numbers, in this case, between 0 and 1. This means that in repeated generating of these random numbers, we every number to appera as frequently as every other number, and when we graph the frequencies of all of our numbers, we should get an uniform distribution where the frequencies are roughly the same.
+First, a random number generator is designed to give a uniform distribution of random numbers, in this case, between 0 and 1. This means that in repeated generating of these random numbers, we every number to appear as frequently as every other number, and when we graph the frequencies of all of our numbers, we should get a uniform distribution where the frequencies are roughly the same.
 
-Now, due to the nature of these random floating point numbers we are generating, we can't just simply look at a graph of the frequencies of these numbers. Floating point numbers are not part of a discrete set of values. They are continuous.* Therefore, it is necessary for us to look at RANGES of numbers, and how many numbers are part of that range, rather than just the frequency of those numbers. Since we are generating 10000 numbers for each implementation, I think it'll be appropriate to split up the range from 0 to 1 into 250 seperate ranges, with 40 numbers within each range.
+Now, due to the nature of these random floating point numbers we are generating, we can't just simply look at a graph of the frequencies of these numbers. Floating point numbers are not part of a discrete set of values. They are continuous.* Therefore, it is necessary for us to look at RANGES of numbers, and how many numbers are part of that range, rather than just the frequency of those numbers. Since we are generating 10000 numbers for each implementation, I think it'll be appropriate to split up the range from 0 to 1 into 250 separate ranges, with 40 numbers within each range.
 
-\* It is to note that due to the way floating point numbers are represented in computers, one could argue that in computer science, floats ARE actually discrete numbers. However, due to the sheer size of all these floats, we'll treat them as if they are continuous anyways.
+\* It is to note that due to the way floating point numbers are represented in computers, one could argue that in computer science, floats ARE actually discrete numbers. However, due to the sheer size of all these floats, we'll treat them as if they are continuous anyway.
 
-We will compare the sum of the squared distances between the actual count and the expected count, divided by the expected count. Sounds familiar? Yeah, it's a chi squared test. However, it is to note that this test will probably not be that insightful since even the worst of random number generators can give us a relatively low chi squared statistic, and compared to how many degrees of freedom we have (249) we'll probably get all 1s for our p values. However, we can still compare the statistic with one another, and see which algorithm scored the best, although again, it doesn't really say much as the score can fluctuate and they're all supposed to be pretty low anyways.
+We will compare the sum of the squared distances between the actual count and the expected count, divided by the expected count. Sounds familiar? Yeah, it's a chi squared test. However, it is to note that this test will probably not be that insightful since even the worst of random number generators can give us a relatively low chi squared statistic, and compared to how many degrees of freedom we have (249) we'll probably get all 1s for our p values. However, we can still compare the statistic with one another, and see which algorithm scored the best, although again, it doesn't really say much as the score can fluctuate, and they're all supposed to be pretty low anyway.
 
 ### Test Two: Comparison of Distribution to Expected Values
 
-The second test is very similiar to the first one, except in this test, we're going to use the line y = x / 10000 to simulate a perfectly uniform distribution and then comparing the data that we get from our random number generators to our expected value from that line.
+The second test is very similar to the first one, except in this test, we're going to use the line y = x / 10000 to simulate a perfectly uniform distribution and then comparing the data that we get from our random number generators to our expected value from that line.
 
 The x value is our `i` counter, which goes from 0 to 10000.
 
-The y value will be be the ith element of the array of all of our 10000 randomly generated numbers, sorted from low to high.
+The y value will be the ith element of the array of all of our 10000 randomly generated numbers, sorted from low to high.
 
 An example RNG data point will look something like this: ( 7149, 0.70941372070736175015 )
 
-Meanwhile our simulated data point based on the line will look like this: ( 7149, 0.7149 )
+Meanwhile, our simulated data point based on the line will look like this: ( 7149, 0.7149 )
 
-We'll go through each of our RNG data points, find the squared difference in distances between the actual distances with the simulated difference, and then sum up all these differences. Similiar to the first test, this test is designed to help us test the uniformity of the distribution, and make sure that our RNG has good coverage on all numbers.
+We'll go through each of our RNG data points, find the squared difference in distances between the actual distances with the simulated difference, and then sum up all these differences. Similar to the first test, this test is designed to help us test the uniformity of the distribution, and make sure that our RNG has good coverage on all numbers.
 
 For example, if our RNG gives us something like 0.665 0.665 0.665 0.666 0.667 0.667 0.667 0.667 0.694 where it stalls at a specific range of numbers and then suddenly advances to another number, this RNG will pass our first test, but will definitely perform worse on this one.
 
 ### Test Three: Distances Between Two Numbers
 
-The last test I'll conduct will be a very unique and telling one: I'll compare the signed square distance and the average absolute distance between two randomly generated numbers.
+The last test I'll conduct will be a unique and telling one: I'll compare the signed square distance and the average absolute distance between two randomly generated numbers.
 
-These metrics are important because it checks the predictibility of a number based on the previous number. Additionally, while all the other tests check only the final set of numbers, this test will instead check for independence between one number and the other.
+These metrics are important because it checks the predictability of a number based on the previous number. Additionally, while all the other tests check only the final set of numbers, this test will instead check for independence between one number and the other.
 
 #### Signed Square Distance
 
