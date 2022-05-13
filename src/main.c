@@ -52,13 +52,13 @@ void metaSimulate1k(RandomFunction function, ShiftState* original, Result* metaR
         simulate10k(function, &state, &result, name);
         // Sum all results
         metaResult -> chiScore += result.chiScore;
-        metaResult -> totalSquaredDiffDist += result.totalSquaredDiffDist;
+        metaResult -> averageSquaredDiffDist += result.averageSquaredDiffDist;
         metaResult -> averageDist += result.averageDist;
         metaResult -> signedSquareDist += result.signedSquareDist;
     }
     // Average all results
     metaResult -> chiScore /= 1000;
-    metaResult -> totalSquaredDiffDist /= 1000;
+    metaResult -> averageSquaredDiffDist /= 1000;
     metaResult -> averageDist /= 1000;
     metaResult -> signedSquareDist /= 1000;
 
@@ -131,8 +131,10 @@ void simulate10k(RandomFunction function, ShiftState* state, Result* result, cha
         totalSquaredDiffDist += squaredDiffDist;
     }
 
+    double averageSquareDiffDist = totalSquaredDiffDist / 10000;
+
     result -> chiScore = chiScore;
-    result -> totalSquaredDiffDist = totalSquaredDiffDist;
+    result -> averageSquaredDiffDist = averageSquareDiffDist;
     result -> averageDist = averageDist;
     result -> signedSquareDist = signedSquareDist;
 
@@ -142,7 +144,7 @@ void simulate10k(RandomFunction function, ShiftState* state, Result* result, cha
 void writeReport(FILE* file, Result* result, char* name, char* pretext) {
     fprintf(file, "%s\n", name);
     fprintf(file, "%s Chi Squared Score For 250 Subdivisions of the Interval 0 - 1: %lf\n", pretext, result -> chiScore);
-    fprintf(file, "%s Total Squared Difference Between Actual and Expected: %lf\n", pretext, result -> totalSquaredDiffDist);
+    fprintf(file, "%s Average Squared Difference Between Actual and Expected: %lf\n", pretext, result -> averageSquaredDiffDist);
     fprintf(file, "%s Average Distance Between Numbers: %lf\n", pretext, result -> averageDist);
     fprintf(file, "%s Signed Square Distance Between Numbers: %lf\n", pretext, result -> signedSquareDist);
     fprintf(file, "\n");

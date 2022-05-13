@@ -7,7 +7,7 @@
 typedef u64 (*RandomFunction)(ShiftState*);
 typedef struct Result {
     double chiScore;
-    double totalSquaredDiffDist;
+    double averageSquaredDiffDist;
     double averageDist;
     double signedSquareDist;
 } Result;
