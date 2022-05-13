@@ -62,12 +62,10 @@ void metaSimulate1k(RandomFunction function, ShiftState* original, Result* metaR
     metaResult -> averageDist /= 1000;
     metaResult -> signedSquareDist /= 1000;
 
-    writeReport(metaReport, metaResult, "Average ");
+    writeReport(metaReport, metaResult, name, "Average");
 }
 
 void simulate10k(RandomFunction function, ShiftState* state, Result* result, char* name) {
-    fprintf(report, name);
-    fprintf(report, "\n");
     fprintf(raw, name);
     fprintf(raw, "\n");
     fprintf(sorted, name);
@@ -138,10 +136,11 @@ void simulate10k(RandomFunction function, ShiftState* state, Result* result, cha
     result -> averageDist = averageDist;
     result -> signedSquareDist = signedSquareDist;
 
-    writeReport(report, result, "");
+    writeReport(report, result, name, "");
 }
 
-void writeReport(FILE* file, Result* result, char* pretext) {
+void writeReport(FILE* file, Result* result, char* name, char* pretext) {
+    fprintf(file, "%s\n", name);
     fprintf(file, "%s Chi Squared Score For 250 Subdivisions of the Interval 0 - 1: %lf\n", pretext, result -> chiScore);
     fprintf(file, "%s Total Squared Difference Between Actual and Expected: %lf\n", pretext, result -> totalSquaredDiffDist);
     fprintf(file, "%s Average Distance Between Numbers: %lf\n", pretext, result -> averageDist);

@@ -15,7 +15,7 @@ typedef struct Result {
 int main();
 void metaSimulate1k(RandomFunction, ShiftState*, Result*, char*);
 void simulate10k(RandomFunction, ShiftState*, Result*, char*);
-void writeReport(FILE* , Result*, char*);
+void writeReport(FILE* , Result*, char*, char*);
 int compareFloat(const void*, const void*);
 
 #endif
