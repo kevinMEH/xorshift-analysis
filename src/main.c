@@ -45,10 +45,10 @@ int main() {
 void metaSimulate1k(RandomFunction function, ShiftState* original, Result* metaResult, char* name) {
     *metaResult = (Result) { 0.0, 0.0, 0.0, 0.0 };
     ShiftState state;
+    memcpy(&state, &original, sizeof(state));
     // Simulate 1k times simulate10k
     for(int i = 0; i < 1000; i++) {
         Result result = { 0.0 };
-        memcpy(&state, &original, sizeof(state));
         simulate10k(function, &state, &result, name);
         // Sum all results
         metaResult -> chiScore += result.chiScore;
