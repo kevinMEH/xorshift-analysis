@@ -28,11 +28,11 @@ int main() {
 
     Result metaResult;
 
-    metaSimulate1k(xorshift, &original, &metaResult, "DefaultImplementation");
-    metaSimulate1k(xorshift, &original, &metaResult, "DefaultImplementation");
-    metaSimulate1k(xorshift, &original, &metaResult, "DefaultImplementation");
-    metaSimulate1k(xorshift, &original, &metaResult, "DefaultImplementation");
-    metaSimulate1k(xorshift, &original, &metaResult, "DefaultImplementation");
+    metaSimulate1k(xorshift, &original, &metaResult, "Default Implementation");
+    metaSimulate1k(xorshiftAlt1, &original, &metaResult, "Alternative Implementation 1");
+    metaSimulate1k(xorshiftAlt2, &original, &metaResult, "Alternative Implementation 2");
+    metaSimulate1k(xorshiftAlt3, &original, &metaResult, "Alternative Implementation 3");
+    metaSimulate1k(xorshiftAlt4, &original, &metaResult, "Alternative Implementation 4");
 
     fclose(metaReport);
     fclose(report);
