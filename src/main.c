@@ -9,11 +9,13 @@
 
 #define PATH "./test/"
 
+FILE* metaReport;
 FILE* report;
 FILE* raw;
 FILE* sorted;
 
 int main() {
+    metaReport = fopen(PATH "metaReport.txt", "w");
     report = fopen(PATH "report.txt", "w");
     raw = fopen(PATH "raw.txt", "w");
     sorted = fopen(PATH "sorted.txt", "w");
@@ -23,19 +25,16 @@ int main() {
     original.x[0] = 0b1101010000110100111010111101011000000111100010110110011101001100;
     original.x[1] = 0b0110110111110000011111110110000110011010111101111111101111010000
                     + (time(NULL) + 1) * (time(NULL) + 1) * time(NULL) * time(NULL);
-    ShiftState state;
 
-    memcpy(&state, &original, sizeof(state));
-    simulate10k(&xorshift, &state, "Default Implementation:");
-    memcpy(&state, &original, sizeof(state));
-    simulate10k(&xorshiftAlt1, &state, "Alternative Implementation 1:");
-    memcpy(&state, &original, sizeof(state));
-    simulate10k(&xorshiftAlt2, &state, "Alternative Implementation 2:");
-    memcpy(&state, &original, sizeof(state));
-    simulate10k(&xorshiftAlt3, &state, "Alternative Implementation 3:");
-    memcpy(&state, &original, sizeof(state));
-    simulate10k(&xorshiftAlt4, &state, "Alternative Implementation 4:");
+    Result metaResult;
 
+    metaSimulate1k(xorshift, &original, &metaResult, "DefaultImplementation");
+    metaSimulate1k(xorshift, &original, &metaResult, "DefaultImplementation");
+    metaSimulate1k(xorshift, &original, &metaResult, "DefaultImplementation");
+    metaSimulate1k(xorshift, &original, &metaResult, "DefaultImplementation");
+    metaSimulate1k(xorshift, &original, &metaResult, "DefaultImplementation");
+
+    fclose(metaReport);
     fclose(report);
     fclose(raw);
     fclose(sorted);
@@ -43,7 +42,30 @@ int main() {
     return 0;
 }
 
-void simulate10k(RandomFunction function, ShiftState* state, char* name) {
+void metaSimulate1k(RandomFunction function, ShiftState* original, Result* metaResult, char* name) {
+    *metaResult = (Result) { 0.0, 0.0, 0.0, 0.0 };
+    ShiftState state;
+    // Simulate 1k times simulate10k
+    for(int i = 0; i < 1000; i++) {
+        Result result = { 0.0 };
+        memcpy(&state, &original, sizeof(state));
+        simulate10k(function, &state, &result, name);
+        // Sum all results
+        metaResult -> chiScore += result.chiScore;
+        metaResult -> totalSquaredDiffDist += result.totalSquaredDiffDist;
+        metaResult -> averageDist += result.averageDist;
+        metaResult -> signedSquareDist += result.signedSquareDist;
+    }
+    // Average all results
+    metaResult -> chiScore /= 1000;
+    metaResult -> totalSquaredDiffDist /= 1000;
+    metaResult -> averageDist /= 1000;
+    metaResult -> signedSquareDist /= 1000;
+
+    writeReport(metaReport, metaResult, "Average ");
+}
+
+void simulate10k(RandomFunction function, ShiftState* state, Result* result, char* name) {
     fprintf(report, name);
     fprintf(report, "\n");
     fprintf(raw, name);
