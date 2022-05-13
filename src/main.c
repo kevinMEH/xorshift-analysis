@@ -111,11 +111,20 @@ void simulate10k(RandomFunction function, ShiftState* state, char* name) {
         totalSquaredDiffDist += squaredDiffDist;
     }
 
-    fprintf(report, "Chi Squared Score For 250 Subdivisions of the Interval 0 - 1: %lf\n", chiScore);
-    fprintf(report, "Total Squared Difference Between Actual and Expected: %lf\n", totalSquaredDiffDist);
-    fprintf(report, "Average Distance Between Numbers: %lf\n", averageDist);
-    fprintf(report, "Signed Square Distance Between Numbers: %lf\n", signedSquareDist);
-    fprintf(report, "\n");
+    result -> chiScore = chiScore;
+    result -> totalSquaredDiffDist = totalSquaredDiffDist;
+    result -> averageDist = averageDist;
+    result -> signedSquareDist = signedSquareDist;
+
+    writeReport(report, result, "");
+}
+
+void writeReport(FILE* file, Result* result, char* pretext) {
+    fprintf(file, "%s Chi Squared Score For 250 Subdivisions of the Interval 0 - 1: %lf\n", pretext, result -> chiScore);
+    fprintf(file, "%s Total Squared Difference Between Actual and Expected: %lf\n", pretext, result -> totalSquaredDiffDist);
+    fprintf(file, "%s Average Distance Between Numbers: %lf\n", pretext, result -> averageDist);
+    fprintf(file, "%s Signed Square Distance Between Numbers: %lf\n", pretext, result -> signedSquareDist);
+    fprintf(file, "\n");
 }
 
 int compareFloat(const void* one, const void* two) {
