@@ -12,6 +12,7 @@ u64 xorshiftAlt1(ShiftState*);
 u64 xorshiftAlt2(ShiftState*);
 u64 xorshiftAlt3(ShiftState*);
 u64 xorshiftAlt4(ShiftState*);
+u64 xorshiftAlt5(ShiftState*);
 void printBits(const size_t, const void * const);
 
 #endif

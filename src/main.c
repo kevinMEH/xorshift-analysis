@@ -33,6 +33,7 @@ int main() {
     metaSimulate1k(xorshiftAlt2, &original, &metaResult, "Alternative Implementation 2");
     metaSimulate1k(xorshiftAlt3, &original, &metaResult, "Alternative Implementation 3");
     metaSimulate1k(xorshiftAlt4, &original, &metaResult, "Alternative Implementation 4");
+    metaSimulate1k(xorshiftAlt5, &original, &metaResult, "Alternative Implementation 4");
 
     fclose(metaReport);
     fclose(report);
