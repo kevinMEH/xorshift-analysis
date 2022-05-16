@@ -1,30 +1,36 @@
 Default Implementation
-Average Chi Squared Score For 250 Subdivisions of the Interval 0 - 1: 250.320050
-Average Average Squared Difference Between Actual and Expected: 0.000018
-Average Average Distance Between Numbers: 0.333481
-Average Signed Square Distance Between Numbers: -0.342114
+Average Chi Squared Score For 250 Subdivisions of the Interval 0 - 1: 249.730950
+Average Average Squared Difference Between Actual and Expected: 0.000017
+Average Average Distance Between Numbers: 0.333349
+Average Signed Square Distance Between Numbers: 0.229536
 
 Alternative Implementation 1
-Average Chi Squared Score For 250 Subdivisions of the Interval 0 - 1: 249.608850
-Average Average Squared Difference Between Actual and Expected: 0.000018
-Average Average Distance Between Numbers: 0.333308
-Average Signed Square Distance Between Numbers: 0.471232
+Average Chi Squared Score For 250 Subdivisions of the Interval 0 - 1: 249.978900
+Average Average Squared Difference Between Actual and Expected: 0.000017
+Average Average Distance Between Numbers: 0.333275
+Average Signed Square Distance Between Numbers: 0.481542
 
 Alternative Implementation 2
-Average Chi Squared Score For 250 Subdivisions of the Interval 0 - 1: 249.567950
+Average Chi Squared Score For 250 Subdivisions of the Interval 0 - 1: 249.958400
 Average Average Squared Difference Between Actual and Expected: 0.000017
-Average Average Distance Between Numbers: 0.333396
-Average Signed Square Distance Between Numbers: 0.148093
+Average Average Distance Between Numbers: 0.333363
+Average Signed Square Distance Between Numbers: -0.280955
 
 Alternative Implementation 3
-Average Chi Squared Score For 250 Subdivisions of the Interval 0 - 1: 248.306100
+Average Chi Squared Score For 250 Subdivisions of the Interval 0 - 1: 249.326950
 Average Average Squared Difference Between Actual and Expected: 0.000017
-Average Average Distance Between Numbers: 0.333263
-Average Signed Square Distance Between Numbers: -0.167842
+Average Average Distance Between Numbers: 0.333266
+Average Signed Square Distance Between Numbers: -0.253630
 
 Alternative Implementation 4
-Average Chi Squared Score For 250 Subdivisions of the Interval 0 - 1: 248.391650
+Average Chi Squared Score For 250 Subdivisions of the Interval 0 - 1: 249.272700
 Average Average Squared Difference Between Actual and Expected: 0.000017
-Average Average Distance Between Numbers: 0.333470
-Average Signed Square Distance Between Numbers: -0.179557
+Average Average Distance Between Numbers: 0.332276
+Average Signed Square Distance Between Numbers: -19.702083
+
+Alternative Implementation 5
+Average Chi Squared Score For 250 Subdivisions of the Interval 0 - 1: 32996.982300
+Average Average Squared Difference Between Actual and Expected: 0.004177
+Average Average Distance Between Numbers: 0.289787
+Average Signed Square Distance Between Numbers: -11.567270
 
